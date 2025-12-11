@@ -1,0 +1,21 @@
+{
+  "name": "dx-repo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Santiago Kent",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.22.0",
+  "devEngines": {
+    "runtime": {
+      "name": "bun",
+      "version": "^1.3.4",
+      "onFail": "download"
+    }
+  }
+}
