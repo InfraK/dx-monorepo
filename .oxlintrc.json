@@ -3,7 +3,7 @@
     "correctness": "error",
     "suspicious": "error",
     "style": "error",
-    "pedantic": "warn",
+    "pedantic": "warn"
   },
   "ignorePatterns": ["node_modules", "dist"]
 }
