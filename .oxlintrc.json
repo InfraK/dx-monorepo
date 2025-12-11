@@ -1,0 +1,9 @@
+{
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "style": "error",
+    "pedantic": "warn",
+  },
+  "ignorePatterns": ["node_modules", "dist"]
+}
