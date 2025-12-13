@@ -7,11 +7,19 @@ interface Project {
   updatedAt: string;
 }
 
-const projects: Project[] = [];
+interface ProjectService {
+  get: () => Project[];
+  create: (project: Project) => Project;
+}
 
-export const getProjects = (): Project[] => projects;
+export const createService = (initialProjects: Project[] = []): ProjectService => {
+  const projects: Project[] = initialProjects;
 
-export const createProject = (data: Project): Project => {
-  projects.push(data);
-  return data;
+  return {
+    create: (data) => {
+      projects.push({ ...data });
+      return { ...data };
+    },
+    get: () => [...projects],
+  };
 };
