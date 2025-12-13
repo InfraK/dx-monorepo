@@ -5,5 +5,18 @@
     "style": "error",
     "pedantic": "warn"
   },
-  "ignorePatterns": ["node_modules", "dist"]
+  "ignorePatterns": ["node_modules", "dist"],
+  "rules": {
+    "eslint/no-ternary": "off",
+    "eslint/no-magic-numbers": [
+      "error",
+      {
+        "ignore": [0],
+        "ignoreArrayIndexes": true,
+        "ignoreDefaultValues": true,
+        "ignoreNumericLiteralTypes": true,
+        "ignoreTypeIndexes": true
+      }
+    ]
+  }
 }
