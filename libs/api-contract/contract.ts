@@ -71,8 +71,8 @@ export const openApiDocument = createDocument({
   },
   servers: [
     {
-      description: 'Dev Endpoint',
-      url: 'http://corp.com/dev',
+      description: 'Local Endpoint',
+      url: 'http://localhost:3000',
     },
     {
       description: 'Prod Endpoint',
