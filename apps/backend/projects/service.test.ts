@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createService } from './projects.ts';
+import { createService } from './service.ts';
 
 describe('projects', () => {
   it('should return empty array initially', () => {

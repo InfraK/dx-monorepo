@@ -1,0 +1,26 @@
+import {
+  CreateProjectRequestSchema,
+  CreateProjectResponseSchema,
+  GetProjectsResponseSchema,
+} from 'api-contract';
+import { H3, readValidatedBody } from 'h3';
+import { createService } from './service.ts';
+
+const projectService = createService();
+
+export const projects = new H3()
+  .get('/', () => {
+    const projects = projectService.get();
+    return {
+      body: GetProjectsResponseSchema.parse(projects),
+      status: 200,
+    };
+  })
+  .post('/', async (event) => {
+    const data = await readValidatedBody(event, CreateProjectRequestSchema);
+    const project = projectService.create(data);
+    return {
+      body: CreateProjectResponseSchema.parse(project),
+      status: 201,
+    };
+  });
