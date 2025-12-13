@@ -11,16 +11,10 @@ const projectService = createService();
 export const projects = new H3()
   .get('/', () => {
     const projects = projectService.get();
-    return {
-      body: GetProjectsResponseSchema.parse(projects),
-      status: 200,
-    };
+    return GetProjectsResponseSchema.parse(projects);
   })
   .post('/', async (event) => {
     const data = await readValidatedBody(event, CreateProjectRequestSchema);
     const project = projectService.create(data);
-    return {
-      body: CreateProjectResponseSchema.parse(project),
-      status: 201,
-    };
+    return CreateProjectResponseSchema.parse(project);
   });
