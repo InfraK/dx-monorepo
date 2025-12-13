@@ -31,9 +31,15 @@ importers:
 
   apps/backend:
     dependencies:
+      api-contract:
+        specifier: workspace:*
+        version: link:../../libs/api-contract
       h3:
         specifier: 2.0.1-rc.6
         version: 2.0.1-rc.6
+      zod:
+        specifier: ^4.1.13
+        version: 4.1.13
 
   libs/api-contract:
     dependencies:

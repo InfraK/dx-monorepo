@@ -12,6 +12,8 @@
   "license": "ISC",
   "packageManager": "pnpm@10.22.0",
   "dependencies": {
-    "h3": "2.0.1-rc.6"
+    "api-contract": "workspace:*",
+    "h3": "2.0.1-rc.6",
+    "zod": "^4.1.13"
   }
 }
