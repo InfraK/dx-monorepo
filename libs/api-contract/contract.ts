@@ -13,7 +13,7 @@ export const ProjectSchema = z.object({
   updatedAt: z.iso.datetime(),
 });
 
-export const CreateProjectRequestSchema = ProjectSchema;
+export const CreateProjectRequestSchema = ProjectSchema.omit({ id: true, updatedAt: true });
 
 export const CreateProjectResponseSchema = ProjectSchema;
 

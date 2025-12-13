@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { describe, expect, it } from 'vitest';
 import { createService } from './service.ts';
 
@@ -10,44 +11,44 @@ describe('projects', () => {
 
   it('should add project and return it', () => {
     const service = createService();
-    const newProject = {
-      id: '1',
+    const newProjectData = {
       lead: 'John Doe',
       name: 'Test Project',
       progress: 0,
       status: 'Active' as const,
-      updatedAt: '2025-12-13',
     };
 
-    const result = service.create(newProject);
+    const result = service.create(newProjectData);
 
-    expect(result).toEqual(newProject);
+    expect(result).toMatchObject(newProjectData);
+    expect(result.id).toBeDefined();
+    expect(result.updatedAt).toBeDefined();
+    expect(typeof result.id).toBe('string');
+    expect(typeof result.updatedAt).toBe('string');
   });
 
   it('should return all created projects', () => {
     const service = createService();
-    const project1 = {
-      id: '1',
+    const projectData1 = {
       lead: 'John Doe',
       name: 'Project 1',
       progress: 0,
       status: 'Active' as const,
-      updatedAt: '2025-12-13',
     };
 
-    const project2 = {
-      id: '2',
+    const projectData2 = {
       lead: 'Jane Smith',
       name: 'Project 2',
       progress: 50,
       status: 'On Hold' as const,
-      updatedAt: '2025-12-13',
     };
 
-    service.create(project1);
-    service.create(project2);
+    const created1 = service.create(projectData1);
+    const created2 = service.create(projectData2);
 
     const projects = service.get();
-    expect(projects).toEqual([project1, project2]);
+    expect(projects).toHaveLength(2);
+    expect(projects).toContainEqual(created1);
+    expect(projects).toContainEqual(created2);
   });
 });

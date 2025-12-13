@@ -15,6 +15,7 @@
   "dependencies": {
     "api-contract": "workspace:*",
     "h3": "2.0.1-rc.6",
+    "uuid": "^13.0.0",
     "zod": "^4.1.13"
   }
 }

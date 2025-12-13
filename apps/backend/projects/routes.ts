@@ -14,6 +14,7 @@ export const projects = new H3()
     return GetProjectsResponseSchema.parse(projects);
   })
   .post('/', async (event) => {
+    event.res.status = 201;
     const data = await readValidatedBody(event, CreateProjectRequestSchema);
     const project = projectService.create(data);
     return CreateProjectResponseSchema.parse(project);

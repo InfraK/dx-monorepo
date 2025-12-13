@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 interface Project {
   id: string;
   lead: string;
@@ -7,9 +9,11 @@ interface Project {
   updatedAt: string;
 }
 
+type CreateProject = Omit<Project, 'id' | 'updatedAt'>;
+
 interface ProjectService {
   get: () => Project[];
-  create: (project: Project) => Project;
+  create: (project: CreateProject) => Project;
 }
 
 export const createService = (initialProjects: Project[] = []): ProjectService => {
@@ -17,8 +21,9 @@ export const createService = (initialProjects: Project[] = []): ProjectService =
 
   return {
     create: (data) => {
-      projects.push({ ...data });
-      return { ...data };
+      const project = { ...data, id: uuidv4(), updatedAt: new Date().toISOString() };
+      projects.push(project);
+      return { ...project };
     },
     get: () => [...projects],
   };
