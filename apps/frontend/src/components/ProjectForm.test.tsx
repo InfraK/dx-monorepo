@@ -34,7 +34,7 @@ describe('ProjectForm', () => {
     expect(screen.getByLabelText(/Progress/i)).toBeInTheDocument();
   });
 
-  it.only('should call onSubmit with form data when form is submitted', async () => {
+  it('should call onSubmit with form data when form is submitted', async () => {
     const user = userEvent.setup();
     const onSubmit = vi.fn();
 
