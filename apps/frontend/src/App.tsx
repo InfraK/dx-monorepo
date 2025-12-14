@@ -11,9 +11,9 @@ export const App = () => {
   const { data, isLoading } = $api.useQuery('get', '/api/projects');
 
   const mutation = $api.useMutation('post', '/api/projects', {
-    onSuccess: () => {
+    onSuccess: async () => {
       setIsModalOpen(false);
-      void queryClient.invalidateQueries({ queryKey: ['get', '/api/projects'] });
+      await queryClient.invalidateQueries({ queryKey: ['get', '/api/projects'] });
     },
   });
 
@@ -52,7 +52,7 @@ export const App = () => {
           }}
           onSubmit={handleFormSubmit}
           isSubmitting={mutation.isPending}
-          error={mutation.error === undefined ? undefined : String(mutation.error)}
+          error={mutation.isError ? (mutation.error as Error).message : undefined}
         />
       </div>
     </div>
