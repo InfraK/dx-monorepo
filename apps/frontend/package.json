@@ -7,7 +7,7 @@
     "dev": "bun --bun vite",
     "build": "pnpm generate-types && tsc -b && vite build",
     "preview": "bun --bun vite preview",
-    "generate-types": "openapi-typescript ./node_modules/api-contract/openapi.json -o ./src/lib/api/types.d.ts",
+    "generate-types": "bun --bun ./generate-types.ts",
     "test": "bun --bun vitest --run",
     "test:watch": "bun --bun vitest",
     "type-check": "tsc --noEmit"
