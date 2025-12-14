@@ -5,7 +5,10 @@
   "main": "index.js",
   "author": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "type-check": "turbo type-check",
+    "test": "turbo test",
     "format": "oxfmt",
     "lint": "oxlint --type-aware --fix"
   },
@@ -25,6 +28,7 @@
     "oxfmt": "^0.17.0",
     "oxlint": "^1.32.0",
     "oxlint-tsgolint": "^0.8.5",
+    "turbo": "^2.6.3",
     "typescript": "^5.9.3",
     "vitest": "^4.0.15"
   }

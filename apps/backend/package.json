@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "bun build ./server.ts --outdir ./dist",
     "dev": "bun run --watch server.ts",
     "test": "bun run --bun vitest --run",
-    "test:watch": "bun run --bun vitest"
+    "test:watch": "bun run --bun vitest",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",

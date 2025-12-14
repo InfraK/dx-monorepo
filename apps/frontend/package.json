@@ -9,7 +9,8 @@
     "preview": "bun --bun vite preview",
     "generate-types": "openapi-typescript ./node_modules/api-contract/openapi.json -o ./src/lib/api/types.d.ts",
     "test": "bun --bun vitest --run",
-    "test:watch": "bun --bun vitest"
+    "test:watch": "bun --bun vitest",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",

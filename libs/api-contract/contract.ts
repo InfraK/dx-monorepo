@@ -1,7 +1,5 @@
 /* eslint-disable no-magic-numbers */
 import { type ZodOpenApiOperationObject, createDocument } from 'zod-openapi';
-import fs from 'fs';
-import path from 'path';
 import { z } from 'zod';
 
 export const ProjectSchema = z.object({
@@ -81,7 +79,4 @@ export const openApiDocument = createDocument({
   ],
 });
 
-fs.writeFileSync(
-  path.join(__dirname, 'openapi.json'),
-  JSON.stringify(openApiDocument, undefined, 2),
-);
+await Bun.write('./dist/openapi.json', JSON.stringify(openApiDocument, undefined, 2));

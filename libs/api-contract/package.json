@@ -7,11 +7,12 @@
   "types": "./contract.ts",
   "exports": {
     ".": "./contract.ts",
-    "./openapi.json": "./openapi.json"
+    "./openapi.json": "./dist/openapi.json"
   },
   "scripts": {
     "build": "bun contract.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "bun --watch contract.ts",
+    "test": "echo \"no tests\""
   },
   "keywords": [],
   "author": "",
