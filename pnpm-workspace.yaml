@@ -4,3 +4,6 @@ packages:
 
 onlyBuiltDependencies:
   - lefthook
+syncInjectedDepsAfterScripts:
+  - build
+injectWorkspacePackages: true

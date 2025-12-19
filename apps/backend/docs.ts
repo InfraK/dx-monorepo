@@ -2,8 +2,8 @@ import { H3, serveStatic } from 'h3';
 import { readFile, stat } from 'node:fs/promises';
 import { join } from 'node:path';
 
-const docsPath = new URL(join('node_modules', 'api-contract', 'openapi.json'), import.meta.url);
-const indexPath = new URL(join('public', 'index.html'), import.meta.url);
+const docsPath = join(process.cwd(), 'node_modules', 'api-contract', 'dist', 'openapi.json');
+const indexPath = join(process.cwd(), 'public', 'index.html');
 
 const docs = new H3()
   .get('/openapi.json', (event) =>
