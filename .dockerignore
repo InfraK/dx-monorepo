@@ -10,3 +10,4 @@ LICENSE
 dist
 .turbo
 .github
+lefthook.yml
