@@ -8,7 +8,7 @@ WORKDIR /app
 
 
 FROM base AS build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm -F backend... install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store CI=true pnpm -F backend... install --frozen-lockfile
 RUN pnpm -F backend... build
 RUN pnpm deploy -F backend --prod /prod/backend
 
