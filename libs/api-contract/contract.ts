@@ -17,6 +17,24 @@ export const CreateProjectResponseSchema = ProjectSchema;
 
 export const GetProjectsResponseSchema = z.array(ProjectSchema);
 
+const ValidationIssueSchema = z.looseObject({
+  code: z.string(),
+  expected: z.string().optional(),
+  message: z.string(),
+  path: z.array(z.string()),
+  values: z.array(z.string()).optional(),
+});
+
+export const ValidationErrorResponseSchema = z.object({
+  data: z.object({
+    issues: z.array(ValidationIssueSchema),
+    message: z.literal('Validation failed'),
+  }),
+  message: z.literal('Validation failed'),
+  status: z.literal(400),
+  statusText: z.literal('Validation failed'),
+});
+
 const getProjectsOperation: ZodOpenApiOperationObject = {
   operationId: 'getProjects',
   responses: {
@@ -40,6 +58,7 @@ const createProjectOperation: ZodOpenApiOperationObject = {
         schema: CreateProjectRequestSchema,
       },
     },
+    required: true,
   },
   responses: {
     '201': {
@@ -49,6 +68,14 @@ const createProjectOperation: ZodOpenApiOperationObject = {
         },
       },
       description: 'Successful creation',
+    },
+    '400': {
+      content: {
+        'application/json': {
+          schema: ValidationErrorResponseSchema,
+        },
+      },
+      description: 'Validation Error',
     },
   },
   summary: 'Create New Project',
