@@ -52,7 +52,7 @@ export const App = () => {
           }}
           onSubmit={handleFormSubmit}
           isSubmitting={mutation.isPending}
-          error={mutation.isError ? (mutation.error as Error).message : undefined}
+          error={mutation.isError ? mutation.error.message : undefined}
         />
       </div>
     </div>

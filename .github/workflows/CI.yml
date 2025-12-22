@@ -46,3 +46,6 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+      - name: Schema test
+        run: ./schema-test.sh
