@@ -8,10 +8,13 @@
   "ignorePatterns": ["node_modules", "dist"],
   "rules": {
     "eslint/no-ternary": "off",
+    "eslint/curly": "off",
+    "eslint/id-length": "off",
+    "eslint/sort-keys": "off",
     "eslint/no-magic-numbers": [
       "error",
       {
-        "ignore": [0],
+        "ignore": [-1, 0, 1, 2, 200, 201, 204, 404, 400],
         "ignoreArrayIndexes": true,
         "ignoreDefaultValues": true,
         "ignoreNumericLiteralTypes": true,
