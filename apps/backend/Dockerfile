@@ -1,14 +1,14 @@
-FROM oven/bun:1-alpine AS base
+FROM node:24-alpine AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN bun install -g pnpm
+RUN corepack enable
 COPY . /app
 WORKDIR /app
 
 
 FROM base AS build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store CI=true pnpm -F backend... install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm -F backend... install --frozen-lockfile
 RUN pnpm -F backend... build
 RUN pnpm deploy -F backend --prod /prod/backend
 
