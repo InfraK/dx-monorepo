@@ -1,0 +1,11 @@
+{
+  "extends": ["../../.oxlintrc.json"],
+  "overrides": [
+    {
+      "files": ["**/*.test.*"],
+      "rules": {
+        "eslint/max-lines-per-function": "off"
+      }
+    }
+  ]
+}

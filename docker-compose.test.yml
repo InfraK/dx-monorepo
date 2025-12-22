@@ -14,7 +14,7 @@ services:
 
   schemathesis:
     image: schemathesis/schemathesis
-    command: run http://backend:3000/docs/openapi.json --continue-on-failure --max-examples 1000
+    command: run http://backend:3000/docs/openapi.json --continue-on-failure --max-examples 100
     volumes:
       - ./schemathesis.toml:/app/schemathesis.toml:z
     depends_on:

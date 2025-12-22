@@ -14,6 +14,9 @@ type CreateProject = Omit<Project, 'id' | 'updatedAt'>;
 interface ProjectService {
   get: () => Project[];
   create: (project: CreateProject) => Project;
+  getById: (id: string) => Project | undefined;
+  update: (id: string, data: Partial<Omit<Project, 'id' | 'updatedAt'>>) => Project | undefined;
+  delete: (id: string) => boolean;
 }
 
 export const createService = (initialProjects: Project[] = []): ProjectService => {
@@ -25,6 +28,22 @@ export const createService = (initialProjects: Project[] = []): ProjectService =
       projects.push(project);
       return { ...project };
     },
+    delete: (id) => {
+      const index = projects.findIndex((p) => p.id === id);
+      if (index === -1) return false;
+      projects.splice(index, 1);
+      return true;
+    },
     get: () => [...projects],
+    getById: (id) => {
+      const project = projects.find((p) => p.id === id);
+      return project ? { ...project } : undefined;
+    },
+    update: (id, data) => {
+      const project = projects.find((p) => p.id === id);
+      if (!project) return;
+      Object.assign(project, data, { updatedAt: new Date().toISOString() });
+      return { ...project };
+    },
   };
 };

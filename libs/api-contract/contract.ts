@@ -17,6 +17,17 @@ export const CreateProjectResponseSchema = ProjectSchema;
 
 export const GetProjectsResponseSchema = z.array(ProjectSchema);
 
+export const ProjectIdParamSchema = z.object({ id: z.uuid().meta({ format: 'uuid' }) });
+
+export const GetProjectByIdResponseSchema = ProjectSchema;
+
+export const UpdateProjectRequestSchema = ProjectSchema.omit({
+  id: true,
+  updatedAt: true,
+}).partial();
+
+export const UpdateProjectResponseSchema = ProjectSchema;
+
 const ValidationIssueSchema = z.looseObject({
   code: z.string(),
   expected: z.string().optional(),
@@ -41,6 +52,24 @@ const getProjectsOperation: ZodOpenApiOperationObject = {
     '200': {
       content: {
         'application/json': {
+          example: [
+            {
+              id: '123e4567-e89b-12d3-a456-426614174000',
+              lead: 'John Doe',
+              name: 'Website Redesign',
+              progress: 75,
+              status: 'Active',
+              updatedAt: '2024-01-15T10:30:00Z',
+            },
+            {
+              id: '987fcdeb-51a2-43f7-9c8d-1234567890ab',
+              lead: 'Jane Smith',
+              name: 'Mobile App Development',
+              progress: 40,
+              status: 'On Hold',
+              updatedAt: '2024-01-14T14:20:00Z',
+            },
+          ],
           schema: GetProjectsResponseSchema,
         },
       },
@@ -55,6 +84,12 @@ const createProjectOperation: ZodOpenApiOperationObject = {
   requestBody: {
     content: {
       'application/json': {
+        example: {
+          lead: 'John Doe',
+          name: 'Website Redesign',
+          progress: 0,
+          status: 'Active',
+        },
         schema: CreateProjectRequestSchema,
       },
     },
@@ -64,6 +99,14 @@ const createProjectOperation: ZodOpenApiOperationObject = {
     '201': {
       content: {
         'application/json': {
+          example: {
+            id: '123e4567-e89b-12d3-a456-426614174000',
+            lead: 'John Doe',
+            name: 'Website Redesign',
+            progress: 0,
+            status: 'Active',
+            updatedAt: '2024-01-15T10:30:00Z',
+          },
           schema: CreateProjectResponseSchema,
         },
       },
@@ -81,6 +124,116 @@ const createProjectOperation: ZodOpenApiOperationObject = {
   summary: 'Create New Project',
 };
 
+const getProjectByIdOperation: ZodOpenApiOperationObject = {
+  operationId: 'getProjectById',
+  requestParams: {
+    path: ProjectIdParamSchema,
+  },
+  responses: {
+    '200': {
+      content: {
+        'application/json': {
+          example: {
+            id: '123e4567-e89b-12d3-a456-426614174000',
+            lead: 'John Doe',
+            name: 'Website Redesign',
+            progress: 75,
+            status: 'Active',
+            updatedAt: '2024-01-15T10:30:00Z',
+          },
+          schema: GetProjectByIdResponseSchema,
+        },
+      },
+      description: 'Successful operation',
+    },
+    '400': {
+      content: {
+        'application/json': {
+          schema: ValidationErrorResponseSchema,
+        },
+      },
+      description: 'Validation Error',
+    },
+    '404': {
+      description: 'Project not found',
+    },
+  },
+  summary: 'Get Project By ID',
+};
+
+const updateProjectOperation: ZodOpenApiOperationObject = {
+  operationId: 'updateProject',
+  requestBody: {
+    content: {
+      'application/json': {
+        schema: UpdateProjectRequestSchema,
+        example: {
+          progress: 85,
+          status: 'Active',
+        },
+      },
+    },
+    required: true,
+  },
+  requestParams: {
+    path: ProjectIdParamSchema,
+  },
+  responses: {
+    '200': {
+      content: {
+        'application/json': {
+          schema: UpdateProjectResponseSchema,
+          example: {
+            id: '123e4567-e89b-12d3-a456-426614174000',
+            lead: 'John Doe',
+            name: 'Website Redesign',
+            progress: 85,
+            status: 'Active',
+            updatedAt: '2024-01-15T11:45:00Z',
+          },
+        },
+      },
+      description: 'Successful update',
+    },
+    '400': {
+      content: {
+        'application/json': {
+          schema: ValidationErrorResponseSchema,
+        },
+      },
+      description: 'Validation Error',
+    },
+    '404': {
+      description: 'Project not found',
+    },
+  },
+  summary: 'Update Project',
+};
+
+const deleteProjectOperation: ZodOpenApiOperationObject = {
+  operationId: 'deleteProject',
+  requestParams: {
+    path: ProjectIdParamSchema,
+  },
+  responses: {
+    '204': {
+      description: 'Project deleted successfully',
+    },
+    '400': {
+      content: {
+        'application/json': {
+          schema: ValidationErrorResponseSchema,
+        },
+      },
+      description: 'Validation Error',
+    },
+    '404': {
+      description: 'Project not found',
+    },
+  },
+  summary: 'Delete Project',
+};
+
 export const openApiDocument = createDocument({
   info: {
     description: 'API for managing project status dashboard',
@@ -92,6 +245,11 @@ export const openApiDocument = createDocument({
     '/api/projects': {
       get: getProjectsOperation,
       post: createProjectOperation,
+    },
+    '/api/projects/{id}': {
+      delete: deleteProjectOperation,
+      get: getProjectByIdOperation,
+      patch: updateProjectOperation,
     },
   },
   servers: [
