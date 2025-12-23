@@ -12,6 +12,24 @@ services:
       retries: 30
       start_period: 5s
 
+  frontend:
+    build:
+      context: .
+      dockerfile: apps/frontend/Dockerfile
+    ports:
+      - '4173:4173'
+    environment:
+      - VITE_BACKEND_URL=http://backend:3000
+    healthcheck:
+      test: ['CMD', 'wget', '--spider', '-q', 'http://localhost:4173/']
+      interval: 1s
+      timeout: 5s
+      retries: 30
+      start_period: 5s
+    depends_on:
+      backend:
+        condition: service_healthy
+
   schemathesis:
     image: schemathesis/schemathesis
     command: run http://backend:3000/docs/openapi.json --continue-on-failure --max-examples 100
@@ -28,3 +46,11 @@ services:
     command: pnpm -F e2e test
     environment:
       - CI=true
+      - PLAYWRIGHT_BASE_URL=http://frontend:4173
+    volumes:
+      - ./apps/e2e/test-results:/app/apps/e2e/test-results:z
+    depends_on:
+      backend:
+        condition: service_healthy
+      frontend:
+        condition: service_healthy

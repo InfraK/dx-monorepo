@@ -7,4 +7,4 @@ cleanup() {
 }
 trap cleanup EXIT
 
-docker compose -f docker-compose.test.yml up e2e --build --abort-on-container-exit --exit-code-from e2e
+docker compose -f docker-compose.test.yml up backend frontend e2e --build --abort-on-container-exit --exit-code-from e2e

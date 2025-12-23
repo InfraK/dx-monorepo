@@ -12,3 +12,4 @@ dist
 .github
 lefthook.yml
 playwright-report
+test-results
