@@ -43,7 +43,7 @@ services:
     build:
       context: .
       dockerfile: apps/e2e/Dockerfile
-    command: pnpm -F e2e test
+    command: pnpm -F e2e test:e2e
     environment:
       - CI=true
       - PLAYWRIGHT_BASE_URL=http://frontend:4173
