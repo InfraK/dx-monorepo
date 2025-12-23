@@ -18,7 +18,7 @@ A modern, contract-centric and type-safe TypeScript monorepo focused on correctn
 - Contract `zod` + `zod-openapi`
 - Backend `h3`
 - Frontend `Vite`, `React`, `React Query` and `TailwindCSS`
-- Testing `Vitest`, `Schemathesis`
+- Testing `Vitest`, `Playwright`, `Schemathesis`
 - Tooling `Oxlint`, `Oxformat`, `Lefthook`
 
 ## Dependencies
@@ -52,14 +52,19 @@ libs/
 
 Unit tests with Vitest.
 
+**End-to-end tests** with Playwright validate complete user flows.
+
 **Property-based API testing** with Schemathesis automatically generates hundreds of test cases from the OpenAPI contract, validating that the backend correctly implements the spec and handles edge cases.
 
 ```sh
 # unit tests
 pnpm test
 
+# e2e tests
+pnpm test:e2e
+
 # schema-based tests
-./schema-test.sh
+pnpm test:schema
 ```
 
 All checks run automatically on every push via GitHub Actions.
