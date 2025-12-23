@@ -3,7 +3,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", "src/lib/api/types.d.ts"]
     },
     "type-check": {
       "dependsOn": ["^type-check", "^build"]
