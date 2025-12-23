@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:e2e": "plawright test"
+    "test:e2e": "playwright test"
   },
   "keywords": [],
   "author": "",
