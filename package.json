@@ -9,6 +9,7 @@
     "dev": "turbo dev",
     "type-check": "turbo type-check",
     "test": "turbo test",
+    "test:e2e": "./e2e-test.sh",
     "format": "oxfmt",
     "lint": "oxlint --type-aware --fix"
   },

@@ -20,3 +20,11 @@ services:
     depends_on:
       backend:
         condition: service_healthy
+
+  e2e:
+    build:
+      context: .
+      dockerfile: apps/e2e/Dockerfile
+    command: pnpm -F e2e test
+    environment:
+      - CI=true
