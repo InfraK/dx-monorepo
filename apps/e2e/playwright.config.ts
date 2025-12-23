@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
-  forbidOnly: !!process.env.CI,
+  forbidOnly: !!(process.env.CI ?? ''),
   reporter: 'html',
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
