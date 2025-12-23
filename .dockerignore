@@ -11,3 +11,5 @@ dist
 .turbo
 .github
 lefthook.yml
+playwright-report
+test-results

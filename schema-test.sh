@@ -7,4 +7,4 @@ cleanup() {
 }
 trap cleanup EXIT
 
-docker compose -f docker-compose.test.yml up --build --abort-on-container-exit --exit-code-from schemathesis
+docker compose -f docker-compose.test.yml up backend schemathesis --build --abort-on-container-exit --exit-code-from schemathesis

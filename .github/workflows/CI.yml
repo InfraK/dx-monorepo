@@ -47,5 +47,20 @@ jobs:
       - name: Test
         run: pnpm test
 
+  schema:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
       - name: Schema test
         run: ./schema-test.sh
+
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: E2E test
+        run: ./e2e-test.sh
