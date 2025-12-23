@@ -13,7 +13,7 @@ RUN pnpm fetch
 FROM base AS build
 COPY . ./
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm -F frontend... install --frozen-lockfile --offline
-RUN pnpm -F frontend build
+RUN pnpm -F frontend... build
 RUN pnpm deploy -F frontend /prod/frontend
 
 FROM base

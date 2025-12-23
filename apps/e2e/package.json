@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "playwright test",
-    "test:docker": "docker compose up --build --abort-on-container-exit"
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
